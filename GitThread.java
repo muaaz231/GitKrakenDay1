@@ -2,23 +2,27 @@ import java.util.*;
 
 
 
-public class GitThread implements Runnable
+public class GitThread
 {
-	private long count;
 
 	public GitThread()
 	{
 
 	}
 
-	@Override
-	public void run()
+	static class ThreadCount implements Runnable
 	{
-		while(count < 10000000)
-		{
-			count++;
-		}
-		System.out.println(count);
+			private long count;
+
+			@Override
+			public void run()
+			{
+				while(count < 10000000)
+				{
+					count++;
+				}
+				System.out.println(count);
+			}
 	}
 
 
@@ -28,7 +32,7 @@ public class GitThread implements Runnable
 
 		for(int i = 0; i < threads.length; i++)
 		{
-			threads[i] = new Thread(new GitThread());
+			threads[i] = new Thread(new ThreadCount());
 			threads[i].start();
 		}
 	}
